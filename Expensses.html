@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense_Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 8px;
+        }
+
+        input,
+        button {
+            padding: 10px;
+            margin: 5px;
+            width: 80%;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px;
+            background: #eee;
+            margin: 5px 0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Expense Tracker</h1>
+    <div class="container">
+        <input type="text" id="desc" placeholder="Expense Description"><br>
+        <input type="number" id="amount" placeholder="Amount"><br>
+        <button onclick="addExpense()">Add Expense</button>
+
+        <ul id="expenseList"></ul>
+        <div class="total" id="totalAmount">Total: ₹0</div>
+    </div>
+
+    <script>
+        let expenses = [];
+        function addExpense() {
+            let desc = document.getElementById('desc').value;
+            let amount = parseFloat(document.getElementById('amount').value);
+
+            if (desc && amount) {
+                expenses.push({ desc, amount });
+                document.getElementById('desc').value = '';  // eg harsh
+                document.getElementById('amount').value = ''; //204
+                renderList();
+            }
+        }
+
+        function renderList() {
+            let list = document.getElementById('expenseList');
+            list.innerHTML = '';
+            let total = 0;
+
+            expenses.forEach((exp, index) =>{
+                total += exp.amount;
+                list.innerHTML += `<li>${exp.desc} ₹${exp.amount}/-
+                <button onclick="deleteExpense(${index})">Remove</button></li>`;
+            });
+
+            document.getElementById('totalAmount').innerText = 'Total: ₹' + total;
+        }
+        function deleteExpense(index) {
+            expenses.splice(index, 1);
+            renderList();
+        }
+    </script>
+
+</body>
+
+</html>
