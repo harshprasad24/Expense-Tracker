@@ -1,0 +1,7 @@
+Type,Description,Amount,Category,Date
+Expense,CLothes,1000,Housing,2025-04-05T11:00:35.487Z
+Expense,goa,10000,Travel,2025-04-05T11:02:57.595Z
+Expense,Pizza,200,Food,2025-04-05T12:00:35.099Z
+Income,Salary,100000,Salary,2025-04-05T10:58:44.107Z
+Income,Rent,20000,Investment,2025-04-05T11:12:49.280Z
+Income,Freelancing,90000,Freelance,2025-04-05T11:13:17.870Z
