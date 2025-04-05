@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="header">
+        <h1>Expense Tracker</h1>
+        <div class="header-controls">
+            <div class="currency-toggle">
+                <select id="currency" onchange="updateCurrency()">
+                    <option value="INR">₹ (INR)</option>
+                    <option value="USD">$ (USD)</option>
+                    <option value="EUR">€ (EUR)</option>
+                </select>
+            </div>
+            <button id="theme-toggle" class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        </div>
+    </div>
+    <div class="filter-section">
+        <div class="filter-controls">
+            <select id="filterType">
+                <option value="all">All Transactions</option>
+                <option value="expense">Expenses Only</option>
+                <option value="income">Income Only</option>
+            </select>
+            <select id="filterCategory">
+                <option value="all">All Categories</option>
+            </select>
+            <input type="month" id="filterMonth">
+            <button onclick="applyFilters()">Apply Filters</button>
+            <button onclick="resetFilters()">Reset</button>
+        </div>
+        <div class="export-controls">
+            <button onclick="exportData('csv')">Export as CSV</button>
+            <button onclick="exportData('json')">Export as JSON</button>
+            <button onclick="exportData('text')">Export as Text</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="input-section">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="switchTab('expense')">Expense</button>
+                <button class="tab-button" onclick="switchTab('income')">Income</button>
+                <button class="tab-button" onclick="switchTab('budget')">Budget</button>
+            </div>
+
+            <div id="expense-tab" class="tab-content active">
+                <input type="text" id="desc" placeholder="Expense Description">
+                <input type="number" id="amount" placeholder="Amount">
+                <select id="category">
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button onclick="addExpense()">Add Expense</button>
+            </div>
+
+            <div id="income-tab" class="tab-content">
+                <input type="text" id="incomeDesc" placeholder="Income Source">
+                <input type="number" id="incomeAmount" placeholder="Amount">
+                <select id="incomeCategory">
+                    <option value="Salary">Salary</option>
+                    <option value="Freelance">Freelance</option>
+                    <option value="Investment">Investment</option>
+                    <option value="Gift">Gift</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button onclick="addIncome()">Add Income</button>
+            </div>
+
+            <div id="budget-tab" class="tab-content">
+                <h3>Set Monthly Budget</h3>
+                <input type="number" id="monthlyBudget" placeholder="Monthly Budget Amount">
+                <button onclick="setBudget()">Set Budget</button>
+
+                <h3>Category Budgets</h3>
+                <div class="category-budget-input">
+                    <select id="budgetCategory">
+                        <option value="Food">Food</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="number" id="categoryBudgetAmount" placeholder="Amount">
+                    <button onclick="setCategoryBudget()">Set</button>
+                </div>
+
+                <div id="budgetAlertsContainer">
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <h3>Total Expenses</h3>
+                <p id="totalExpenses">₹0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Income</h3>
+                <p id="totalIncome">₹0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Balance</h3>
+                <p id="balance">₹0</p>
+            </div>
+            <div class="stat-card budget-card">
+                <h3>Budget Remaining</h3>
+                <p id="budgetRemaining">₹0</p>
+            </div>
+        </div>
+
+        <div class="lists-section">
+            <div class="list-container">
+                <h2>Expenses</h2>
+                <ul id="expenseList"></ul>
+            </div>
+            <div class="list-container">
+                <h2>Income</h2>
+                <ul id="incomeList"></ul>
+            </div>
+        </div>
+
+        <div class="charts-section">
+            <div class="chart-container">
+                <canvas id="expenseChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="incomeChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div id="budgetAlertModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="alertTitle">Budget Alert</h2>
+            <p id="alertMessage"></p>
+            <button onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
