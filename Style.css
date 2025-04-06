@@ -3,7 +3,7 @@ body {
     background: #a5c4f1;
     padding: 20px;
     color: #2027a3;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s; 
 }
 
 body.dark-theme {
